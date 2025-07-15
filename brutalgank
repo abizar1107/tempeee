@@ -1,8 +1,40 @@
-mkdir volume-web
-cd volume-web
-git init
-git remote add origin https://github.com/USERNAME/REPO.git
-git add .
-git commit -m "upload web brutalgank"
-git branch -M main
-git push -u origin main
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Katalog Komunitas Mas Pe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🌐 Katalog Komunitas BrutalGank</h1>
+
+  <section>
+    <h2>👥 Daftar Anggota</h2>
+    <ul id="anggota"></ul>
+  </section>
+
+  <section>
+    <h2>🛍️ Produk & Event</h2>
+    <ul id="produk"></ul>
+  </section>
+
+  <script>
+    async function loadJSON(file, targetId, renderFn) {
+      const res = await fetch(file);
+      const data = await res.json();
+      document.getElementById(targetId).innerHTML = data.map(renderFn).join('');
+    }
+
+    function renderAnggota(a) {
+      return `<li><strong>${a.nama}</strong> – ${a.role} | <a href="${a.instagram}">IG</a></li>`;
+    }
+
+    function renderProduk(p) {
+      return `<li><strong>${p.nama}</strong>: ${p.deskripsi}</li>`;
+    }
+
+    loadJSON('data/anggota.json', 'anggota', renderAnggota);
+    loadJSON('data/produk.json', 'produk', renderProduk);
+  </script>
+</body>
+</html>
