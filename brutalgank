@@ -1,0 +1,8 @@
+mkdir volume-web
+cd volume-web
+git init
+git remote add origin https://github.com/USERNAME/REPO.git
+git add .
+git commit -m "upload web brutalgank"
+git branch -M main
+git push -u origin main
